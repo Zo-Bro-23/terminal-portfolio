@@ -7,8 +7,12 @@ on:
 
 
 jobs:
-  build:
+   build:
     runs-on: ubuntu-latest
+
+
+    env:
+      NEXT_PUBLIC_BASE_PATH: /Portfolio
 
 
     strategy:

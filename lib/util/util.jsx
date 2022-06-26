@@ -8,3 +8,5 @@ export function deviceType() {
     }
     return "desktop";
 };
+
+export const FILE_PREFIX = process.env.NEXT_PUBLIC_BASE_PATH || "";
