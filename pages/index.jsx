@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useEffect, useRef, useState } from 'react'
 import TicTacToe from '../lib/games/TicTacToe'
 import Typewriter from '../lib/Typewriter'
-import { deviceType, FILE_PREFIX } from '../lib/util/util'
+import { deviceType, BASE_PREFIX } from '../lib/util/util'
 import styles from '../styles/Home.module.css'
 
 const USER_TEXT = 'C:\\Users\\Aarush\\Portfolio>' + ' '
@@ -196,18 +196,16 @@ export default function Home() {
                     case 'ping':
                         responseTypewriter.typeString('Pong!').start().then(() => typing = false)
                         break;
-                    case 'hangman':
-                        break;
                     case 'ttt':
                         responseTypewriter
                             .typeString('Welcome to Tic-Tac-Toe! Type "start" to start. Or type "exit" to exit at anytime.')
                             .start().then(() => typing = false)
                         game = 'ttt'
                         break;
+                    case 'hangman': // unfinished commands TODO
                     case 'ascii':
-                        break;
                     case '':
-                        const test = await fetch('/api/hello').then(res => res.json()).catch(err => console.log(err))
+                        const test = await fetch(`${BASE_PREFIX}/api/hello`).then(res => res.json()).catch(err => console.log(err))
                         console.log(test)
                         typing = false
                         break;
@@ -359,7 +357,7 @@ export default function Home() {
         <>
             <Head>
                 <title>Portfolio</title>
-                <link rel="icon" href={`${FILE_PREFIX}/favicon.ico`} />
+                <link rel="icon" href={`${BASE_PREFIX}/favicon.ico`} />
             </Head>
             <div className={styles.consoleDisplay} ref={consoleDisplayRef}></div>
             <div className={styles.consoleInputDisplay} ref={consoleInputDisplayRef}>

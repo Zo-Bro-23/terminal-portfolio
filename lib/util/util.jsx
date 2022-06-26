@@ -9,4 +9,4 @@ export function deviceType() {
     return "desktop";
 };
 
-export const FILE_PREFIX = process.env.NEXT_PUBLIC_BASE_PATH || "";
+export const BASE_PREFIX = process.env.NEXT_PUBLIC_BASE_PATH || "";
