@@ -10,7 +10,7 @@ export default class Typewriter {
     }
     #scrollDiv(pos = null) {
         const rect = this.#parent.getBoundingClientRect()
-        window.scrollTo(null, pos ? pos : rect.height)
+        window.scrollTo({ top: pos ? pos : rect.height })
     }
     constructor(
         parent,

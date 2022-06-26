@@ -42,12 +42,13 @@ export default function Home() {
         setMount(!mount)
         if (!mount) return // prevent duplicated rendering
 
-        if (deviceType() === 'desktop') {
-            // Initial Ascii Art
-            const mainTypewriter1 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass1 })
-            const mainTypewriter2 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass2 })
-            const mainTypewriter3 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass3 })
-            mainTypewriter1.typeString(`
+        // Initial Ascii Art
+        const mainTypewriter1 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass1 })
+        const mainTypewriter2 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass2 })
+        const mainTypewriter3 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass3 })
+        const infoTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 3, className: styles.warnClass })
+       
+        mainTypewriter1.typeString(`
                              *       *             *         ..-. *   .    *
                            .         *   *    .-. *  .  _  _/ ^  \\   _   .   *
                                  *           /   \\     (( / ^    ^\\_/ \\       *  .
@@ -67,14 +68,14 @@ export default function Home() {
                                                  /    |    \\
                                                 /     |     \\
                                                /      |      \\`).start()
-            mainTypewriter2.typeString(`
+        mainTypewriter2.typeString(`
          _____                            .__       _______                                   /\\       
         /  _  \\ _____ _______ __ __  _____|  |__    \\      \\ _____ ____________    ____    ___)/ ______
        /  /_\\  \\\\__  \\\\_  __ \\  |  \\/  ___/  |  \\   /   |   \\\\__  \\\\_  __ \\__  \\  /    \\  / ___\\/  ___/
       /    |    \\/ __ \\|  | \\/  |  /\\___ \\|   Y  \\ /    |    \\/ __ \\|  | \\// __ \\|   |  \\/ /_/  >___ \\ 
       \\____|__  (____  /__|  |____//____  >___|  / \\____|__  (____  /__|  (____  /___|  /\\___  /____  >
               \\/     \\/                 \\/     \\/          \\/     \\/           \\/     \\//_____/     \\/`).start()
-            mainTypewriter3.typeString(`
+        mainTypewriter3.typeString(`
         ___      ___           ___                  ___       ___                     ___           ___     
        /\\  \\    /\\  \\         /\\  \\                /\\__\\     /\\  \\   ___             /\\  \\         /\\  \\    
       /::\\  \\  /::\\  \\       /::\\  \\       ___    /:/ _/_   /::\\  \\ /\\  \\           /:/__/        /::\\  \\   
@@ -86,10 +87,9 @@ export default function Home() {
      \\:\\  \\   \\:\\/:/  /     \\:\\~~\\    \\/__\\:\\  \\ \\:\\  \\    \\:\\/:/  /     \\:\\/:/  /       \\::/  / \\:\\/:/  /  
       \\:\\__\\   \\::/  /       \\:\\__\\        \\:\\__\\ \\:\\__\\    \\::/  /       \\::/  /        /:/  /   \\::/  /   
        \\/__/    \\/__/         \\/__/         \\/__/  \\/__/     \\/__/         \\/__/         \\/__/     \\/__/    
-        `).start()
-        }
-        const infoTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 3, className: styles.warnClass })
-        infoTypewriter.pauseFor(500).typeString('Welcome to my Portfolio! Type "help" to see a list of commands.').start()
+        `).start().then(() => {
+            infoTypewriter.pauseFor(500).typeString('Welcome to my Portfolio! Type "help" to see a list of commands.').start()
+        })
 
         // Initialize Games
         const ttt = new TicTacToe(consoleDisplayRef.current)
@@ -169,13 +169,11 @@ export default function Home() {
                             const urlTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 4, className: styles.urlClass })
                             const descriptionTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 8, className: styles.descriptionClass })
                             const languagesTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 16, className: styles.languagesClass })
-                            const separatorTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 1, className: styles.separatorClass })
 
                             await nameTypewriter.typeString(`${repo.name}${repo.fork ? ' (forked)' : ''}`).start()
                             await descriptionTypewriter.typeString(`${repo.description}`).start()
                             await languagesTypewriter.typeString(`${repo.languages}`).start()
                             await urlTypewriter.typeString(`${repo.url}`).start()
-                            await separatorTypewriter.typeString('-'.repeat(Math.max(repo.name.length + repo.fork ? ' (forked)'.length : 0, repo.description.length, repo.languages.length, repo.url.length))).start()
                         }
                         typing = false
                         break;

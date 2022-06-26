@@ -65,27 +65,42 @@
     color: hsl(31, 73%, 69%);
 }
 .urlClass {
+    display: flex;
+    flex-direction: column;
     margin: 0 0 2px 0;
     color: hsl(178, 99%, 66%);
 }
-.separatorClass {
-    color: hsl(270, 100%, 50%);
+.urlClass::after {
+    content: '';
+    min-width: 100%;
+    width: 500px;
+    max-width: 100vw;
+    height: 1.5px;
+    margin-top: 10px;
+    background-color: hsl(270, 100%, 50%);
 }
+
 
 .asciiStartClass1 {
     user-select: none;
     color: hsl(195, 33%, 49%);
     font-weight: bold;
+    word-break: keep-all;
+    white-space: pre;
 }
 .asciiStartClass2 {
     user-select: none;
     color: hsl(162, 29%, 64%);
     font-weight: bold;
+    word-break: keep-all;
+    white-space: pre;
 }
 .asciiStartClass3 {
     user-select: none;
     color: hsl(229, 100%, 82%);
     font-weight: bold;
+    word-break: keep-all;
+    white-space: pre;
 }
 
 .caret {
