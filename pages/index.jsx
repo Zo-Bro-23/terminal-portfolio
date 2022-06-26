@@ -35,8 +35,6 @@ export default function Home() {
     const game = useRef(null).current
     const gameStarted = useRef(false).current
 
-
-
     useEffect(() => {
         setMount(!mount)
         if (!mount) return // prevent duplicated rendering
