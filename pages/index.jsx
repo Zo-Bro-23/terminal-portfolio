@@ -14,7 +14,7 @@ const USER_TEXT = 'C:\\Users\\Aarush\\Portfolio>' + ' '
 // projects: display projects from github, about: display about/who i am, contact: display contact (email, phone, etc)
 
 // secret commands like hangman, tic-tac-toe, ascii, and more will be added soon
-const commands = ['clear', 'help', 'exit', 'projects', 'about', 'contact']
+const commands = ['clear', 'help', 'exit', 'projects', 'about', 'contact', '+ other secret commands :)\n\n(Hint: try "ttt")']
 
 const CHAR_WIDTH = 8.1879
 const ASCII_ART_SPEED = 1
@@ -88,6 +88,8 @@ export default function Home() {
        \\/__/    \\/__/         \\/__/         \\/__/  \\/__/     \\/__/         \\/__/         \\/__/     \\/__/    
         `).start()
         }
+        const infoTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 3, className: styles.warnClass })
+        infoTypewriter.pauseFor(500).typeString('Welcome to my Portfolio! Type "help" to see a list of commands.').start()
 
         // Initialize Games
         const ttt = new TicTacToe(consoleDisplayRef.current)
