@@ -68,14 +68,17 @@
 }
 
 .asciiStartClass1 {
+    user-select: none;
     color: hsl(195, 33%, 49%);
     font-weight: bold;
 }
 .asciiStartClass2 {
+    user-select: none;
     color: hsl(162, 29%, 64%);
     font-weight: bold;
 }
 .asciiStartClass3 {
+    user-select: none;
     color: hsl(229, 100%, 82%);
     font-weight: bold;
 }
@@ -99,6 +102,6 @@
 
 @keyframes caret {
     50% {
-        opacity: 0.4;
+        opacity: 0.3;
     }
 }

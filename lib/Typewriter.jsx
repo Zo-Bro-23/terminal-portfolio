@@ -9,7 +9,8 @@ export default class Typewriter {
         this.#queue.push(() => new Promise(cb))
     }
     #scrollDiv(pos = null) {
-        window.scrollTo(null, pos ? pos : this.#parent.scrollHeight)
+        const rect = this.#parent.getBoundingClientRect()
+        window.scrollTo(null, pos ? pos : rect.height)
     }
     constructor(
         parent,
