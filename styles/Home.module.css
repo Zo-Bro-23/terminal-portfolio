@@ -44,6 +44,28 @@
     font-weight: bold;
 }
 
+.nameClass {
+    margin: 25px 0 8px 0;
+    color: hsl(219, 100%, 67%);
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 20px;
+}
+.descriptionClass {
+    margin: 0 0 2px 0;
+    color: hsl(130, 100%, 79%);
+}
+.languagesClass {
+    margin: 0 0 2px 0;
+    color: hsl(31, 73%, 69%);
+}
+.urlClass {
+    margin: 0 0 2px 0;
+    color: hsl(178, 99%, 66%);
+}
+.separatorClass {
+    color: hsl(270, 100%, 50%);
+}
 
 .asciiStartClass1 {
     color: hsl(195, 33%, 49%);

@@ -17,6 +17,7 @@ const USER_TEXT = 'C:\\Users\\Aarush\\Portfolio>' + ' '
 const commands = ['clear', 'help', 'exit', 'projects', 'about', 'contact']
 
 const CHAR_WIDTH = 8.1879
+const ASCII_ART_DELAY = 0
 
 export default function Home() {
     const consoleDisplayRef = useRef(null)
@@ -40,9 +41,9 @@ export default function Home() {
         if (!mount) return // prevent duplicated rendering
 
         // Initial Ascii Art
-        const mainTypewriter1 = new Typewriter(consoleDisplayRef.current, { typingSpeed: 1, className: styles.asciiStartClass1 })
-        const mainTypewriter2 = new Typewriter(consoleDisplayRef.current, { typingSpeed: 1, className: styles.asciiStartClass2 })
-        const mainTypewriter3 = new Typewriter(consoleDisplayRef.current, { typingSpeed: 1, className: styles.asciiStartClass3 })
+        const mainTypewriter1 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_DELAY, className: styles.asciiStartClass1 })
+        const mainTypewriter2 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_DELAY, className: styles.asciiStartClass2 })
+        const mainTypewriter3 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_DELAY, className: styles.asciiStartClass3 })
         mainTypewriter1.typeString(`
                              *       *             *         ..-. *   .    *
                            .         *   *    .-. *  .  _  _/ ^  \\   _   .   *
@@ -94,13 +95,22 @@ export default function Home() {
         const setCursorPos = (selectionPos) => {
             caretRef.current.style.left = `${220 + (selectionPos * CHAR_WIDTH) - (lineNumber * consoleInputDisplayRef.current.clientWidth)}px`
         }
-        const handleConsoleSubmit = e => { // type out in display once submitted command
+        const handleConsoleSubmit = async e => { // type out in display once submitted command
             e.preventDefault()
             setCursorPos(0)
 
             const formData = new FormData(e.target)
             const typedCommand = formData.get('command')
 
+            // add to history
+            history = [...history, typedCommand]
+            historyIndex = 0
+
+            // clear inputs
+            setInputText('')
+            e.target.reset()
+
+            // start basic typewriters
             const commandTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 0, className: styles.commandClass })
             commandTypewriter.typeString(`${USER_TEXT}${typedCommand}`).start()
 
@@ -116,7 +126,7 @@ export default function Home() {
                         responseTypewriter.typeString(`Commands: ${commands.join(', ')}`).start()
                         break;
                     case 'exit':
-                        const exitTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 40 })
+                        const exitTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 40, className: styles.errClass })
                         exitTypewriter.typeString('Closing console... ')
                             .deleteChars(3)
                             .typeString('...')
@@ -132,6 +142,33 @@ export default function Home() {
                         }, 2000)
                         break;
                     case 'projects':
+                        const repositoriesJSON = await fetch('https://api.github.com/users/aarush-narang/repos').then(res => res.json()).catch(err => console.log(err))
+
+                        const repositories = await Promise.all(await repositoriesJSON.map(async repo => {
+                            const languagesJSON = await fetch(`https://api.github.com/repos/aarush-narang/${repo.name}/languages`).then(res => res.json()).catch(err => console.log(err))
+                            return {
+                                name: repo.full_name,
+                                url: repo.html_url,
+                                description: repo.description ? repo.description : 'No description provided.',
+                                fork: repo.fork,
+                                languages: Object.keys(languagesJSON).length ? Object.keys(languagesJSON).join(', ') : 'No languages.'
+                            }
+                        }))
+
+                        for (const repo of repositories) {
+                            const nameTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 2, className: styles.nameClass })
+                            const urlTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 4, className: styles.urlClass })
+                            const descriptionTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 8, className: styles.descriptionClass })
+                            const languagesTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 16, className: styles.languagesClass })
+                            const separatorTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 1, className: styles.separatorClass })
+
+                            await nameTypewriter.typeString(`${repo.name}${repo.fork ? ' (forked)' : ''}`).start()
+                            await descriptionTypewriter.typeString(`${repo.description}`).start()
+                            await languagesTypewriter.typeString(`${repo.languages}`).start()
+                            await urlTypewriter.typeString(`${repo.url}`).start()
+                            await separatorTypewriter.typeString('-'.repeat(Math.max(repo.name.length + repo.fork ? ' (forked)'.length : 0, repo.description.length, repo.languages.length, repo.url.length))).start()
+                        }
+
                         break;
                     case 'about':
                         responseTypewriter
@@ -223,13 +260,7 @@ export default function Home() {
             }
             else if (game === 'ascii') { }
             else if (game === 'hangman') { }
-            // add to history
-            history = [...history, typedCommand]
-            historyIndex = 0
-
-            // clear inputs
-            setInputText('')
-            e.target.reset()
+            
         }
         const handleInput = e => { // change display value to input value
             setInputText(e.target.value)
@@ -241,18 +272,21 @@ export default function Home() {
         const handleKeyDown = e => { // make sure to focus on input every time a key is pressed
             switch (e.key.toLowerCase()) {
                 case 'arrowup':
+                    e.preventDefault()
                     historyIndex = historyIndex - 1 < 0 && historyIndex != history.length ? history.length - 1 : historyIndex - 1
                     consoleInputRef.current.value = history[historyIndex]
 
                     consoleInputRef.current.dispatchEvent(new Event('input'))
                     break;
                 case 'arrowdown':
+                    e.preventDefault()
                     historyIndex = historyIndex + 1 > history.length - 1 ? 0 : historyIndex + 1
                     consoleInputRef.current.value = history[historyIndex]
 
                     consoleInputRef.current.dispatchEvent(new Event('input'))
                     break;
                 case 'backspace':
+                    if (!e.shiftKey && !e.ctrlKey) consoleInputRef.current.focus()
                     const pos = consoleInputRef.current.selectionStart != 0 ? consoleInputRef.current.selectionStart - 1 : 0
                     setCursorPos(pos)
                     break;
@@ -282,7 +316,9 @@ export default function Home() {
                 case 'x':
                 case 'y':
                 case 'z':
-                    if(!e.shiftKey && !e.ctrlKey) consoleInputRef.current.focus()
+                case ' ':
+                case 'enter':
+                    if (!e.shiftKey && !e.ctrlKey) consoleInputRef.current.focus()
                     break;
                 default:
                     break;
