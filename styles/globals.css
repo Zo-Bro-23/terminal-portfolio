@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap');
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  
+  
+  background-color: black;
+
+  color: white;
+  font-family: Anonymous Pro;
+  font-size: 15px;
+
+  padding: 3px;
+  max-width: 100%;
+  word-break: break-all;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* scrollbars */
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+*::-webkit-scrollbar-track {
+  background: black;
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: hsl(0, 0%, 22%);
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: hsl(0, 0%, 25%);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background: hsl(0, 0%, 30%);
+}
+
+/* selection */
+::selection {
+  color: black;
+  background: white;
+}
+::-moz-selection {
+  color: black;
+  background: white;
+}

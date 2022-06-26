@@ -1,0 +1,82 @@
+.consoleDisplay:not(:empty) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    word-break: keep-all;
+    white-space: pre-wrap;
+    max-width: 100%;
+}
+
+.consoleInputDisplay {
+    display: flex;
+    white-space: pre;
+    position: relative;
+    word-break: keep-all;
+}
+
+.commandClass {
+    white-space: pre-wrap;
+}
+.responseClass {
+    margin: 4px 0 20px 0;
+    color: #00ff00;
+}
+.boardClass {
+    margin: 4px 0 20px 0;
+    color: hsl(20, 100%, 72%);
+    font-size: 30px;
+    font-weight: bold;
+}
+.errClass {
+    margin: 4px 0 20px 0;
+    color: #ff5151;
+    font-weight: bold;
+}
+.promptClass {
+    margin: 4px 0 20px 0;
+    color: hsl(195, 73%, 69%);
+    font-weight: bold;
+}
+.winnerClass {
+    margin: 4px 0 20px 0;
+    color: #26ac8f;
+    font-weight: bold;
+}
+
+
+.asciiStartClass1 {
+    color: hsl(195, 33%, 49%);
+    font-weight: bold;
+}
+.asciiStartClass2 {
+    color: hsl(162, 29%, 64%);
+    font-weight: bold;
+}
+.asciiStartClass3 {
+    color: hsl(229, 100%, 82%);
+    font-weight: bold;
+}
+
+.caret {
+    display: flex;
+    position: absolute;
+    left: 220px;
+    width: 8.2px;
+    height: 14px;
+    opacity: 1;
+    background-color: white;
+    animation: caret 0.7s cubic-bezier(0.21, 0.51, 0.89, 0.56) 0s infinite forwards;
+}
+
+.consoleInput {
+    z-index: -1000000;
+    pointer-events: none;
+    opacity: 0;
+}
+
+@keyframes caret {
+    50% {
+        opacity: 0.4;
+    }
+}
