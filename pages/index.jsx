@@ -144,6 +144,7 @@ export default function Home() {
                     case 'help':
                         responseTypewriter.typeString(`Commands: ${commands.join(', ')}`).start().then(() => typing = false)
                         break;
+                    case 'close':
                     case 'exit':
                         errTypewriter.typeString('Closing console...')
                             .deleteChars(3)
@@ -233,7 +234,8 @@ export default function Home() {
                             .typeString('I have a passion for learning new technologies and constantly learning new things.\n')
                             .typeString('I am currently a student at Lynbrook High School.\n\n')
                             .typeString('You can find my projects by running the "projects" command and you can find my contact information by running the "contact" command.\n')
-                            .typeString('I am proficient in HTML, CSS, Javascript, and Python. I have used frameworks such as React/NextJS, Flask. And I have used MongoDB in several projects as well as experimented with MySQL/SQL based databases.')
+                            .typeString('I am proficient in HTML, CSS, Javascript, and Python. I have used frameworks such as React/NextJS, Flask. And I have used MongoDB in several projects as well as experimented with MySQL/SQL based databases.\n')
+                            .typeString('I am currently working on a messaging app using NextJS and MongoDB\n')
                             .start().then(() => typing = false)
                         break;
                     case 'contact':
@@ -486,14 +488,14 @@ export default function Home() {
 
         document.addEventListener('keydown', handleKeyDown)
         if (deviceType() !== 'desktop') {
-            document.addEventListener('click', () => consoleInputRef.current.focus())
+            document.addEventListener('click', () => consoleInputRef.current.focus()) // For mobile devices, focus on tap
         }
 
         consoleInputRef.current.addEventListener('input', handleInput)
         document.addEventListener('selectionchange', handleInputSelection)
 
         consoleInputFormRef.current.addEventListener('submit', handleConsoleSubmit)
-    }, [consoleDisplayRef.current && consoleInputDisplayRef.current && consoleInputRef.current]) // when all three refs are ready
+    }, [consoleDisplayRef.current && consoleInputDisplayRef.current && consoleInputRef.current])
 
     return (
         <>
