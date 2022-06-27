@@ -28,6 +28,12 @@
     font-size: 30px;
     font-weight: bold;
 }
+.boardClassChosen {
+    margin: 4px 0 20px 0;
+    color: hsl(5, 100%, 72%);
+    font-size: 30px;
+    font-weight: bold;
+}
 .errClass {
     margin: 4px 0 20px 0;
     color: #ff5151;
@@ -37,6 +43,7 @@
     margin: 4px 0 20px 0;
     color: #f7eb91;
     font-weight: bold;
+    font-size: 20px;
 }
 .promptClass {
     margin: 4px 0 20px 0;

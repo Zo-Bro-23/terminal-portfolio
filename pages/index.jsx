@@ -14,10 +14,16 @@ const USER_TEXT = 'C:\\Users\\Aarush\\Portfolio>' + ' '
 // projects: display projects from github, about: display about/who i am, contact: display contact (email, phone, etc)
 
 // secret commands like hangman, tic-tac-toe, ascii, and more will be added soon
-const commands = ['clear', 'help', 'exit', 'projects', 'about', 'contact', '+ other secret commands :)\n\n(Hint: try "ttt")']
 
 const CHAR_WIDTH = 8.1879
-const ASCII_ART_SPEED = 1
+const ASCII_ART_SPEED = 0
+
+const CONTACT_INFO = {
+    email: 'aarushnarang@gmail.com',
+    github: 'https://github.com/aarush-narang',
+    linkedin: 'https://www.linkedin.com/in/aarush-narang-0056a4241',
+    host: 'https://aarush-narang.github.io/portfolio'
+}
 
 export default function Home() {
     const consoleDisplayRef = useRef(null)
@@ -47,7 +53,7 @@ export default function Home() {
         const mainTypewriter2 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass2 })
         const mainTypewriter3 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass3 })
         const infoTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 3, className: styles.warnClass })
-       
+
         mainTypewriter1.typeString(`
                              *       *             *         ..-. *   .    *
                            .         *   *    .-. *  .  _  _/ ^  \\   _   .   *
@@ -88,7 +94,7 @@ export default function Home() {
       \\:\\__\\   \\::/  /       \\:\\__\\        \\:\\__\\ \\:\\__\\    \\::/  /       \\::/  /        /:/  /   \\::/  /   
        \\/__/    \\/__/         \\/__/         \\/__/  \\/__/     \\/__/         \\/__/         \\/__/     \\/__/    
         `).start().then(() => {
-            infoTypewriter.pauseFor(500).typeString('Welcome to my Portfolio! Type "help" to see a list of commands.').start()
+            infoTypewriter.pauseFor(200).typeString('Welcome to my Portfolio! Type "help" to see a list of commands.').start()
         })
 
         // Initialize Games
@@ -120,10 +126,13 @@ export default function Home() {
             const commandTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 0, className: styles.commandClass })
             commandTypewriter.typeString(`${USER_TEXT}${typedCommand}`).start()
 
-            const responseTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 30, className: styles.responseClass })
+            const responseTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 10, className: styles.responseClass })
+            const commands = ['help', 'projects', 'about', 'contact', 'contact <social>', 'source', 'ping', 'clear', 'reload', 'exit', '+ other secret commands :)\n\n(Hint: try "ttt")']
+
+            const errTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 25, className: styles.errClass })
 
             if (!game) {
-                switch (typedCommand) {
+                switch (typedCommand.toLowerCase()) {
                     case 'clear':
                         consoleDisplayRef.current.innerHTML = ''
                         responseTypewriter.typeString('Console was cleared.').start().then(() => typing = false)
@@ -135,8 +144,7 @@ export default function Home() {
                         responseTypewriter.typeString(`Commands: ${commands.join(', ')}`).start().then(() => typing = false)
                         break;
                     case 'exit':
-                        const exitTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 40, className: styles.errClass })
-                        exitTypewriter.typeString('Closing console... ')
+                        errTypewriter.typeString('Closing console...')
                             .deleteChars(3)
                             .typeString('...')
                             .deleteChars(3)
@@ -148,13 +156,49 @@ export default function Home() {
                             .start().then(() => typing = false)
                         setTimeout(() => {
                             window.open("", '_self').window.close();
-                        }, 2000)
+                        }, 1000)
+                        break;
+                    case 'reload':
+                        errTypewriter.typeString('Reloading console...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .start().then(() => typing = false)
+                        setTimeout(() => {
+                            window.location.reload()
+                        }, 1000)
                         break;
                     case 'projects':
-                        const repositoriesJSON = await fetch('https://api.github.com/users/aarush-narang/repos').then(res => res.json()).catch(err => console.log(err))
+                        responseTypewriter.typeString('Fetching Projects...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .start().then(() => typing = false)
+
+                        const repositoriesJSON = await fetch('https://api.github.com/users/aarush-narang/repos').then(res => res.json()).catch(() => {
+                            responseTypewriter.typeString('Unable to fetch.').start()
+                            typing = false
+                            return null
+                        })
+
+                        if (repositoriesJSON == null) break;
 
                         const repositories = await Promise.all(await repositoriesJSON.map(async repo => {
-                            const languagesJSON = await fetch(`https://api.github.com/repos/aarush-narang/${repo.name}/languages`).then(res => res.json()).catch(err => console.log(err))
+                            const languagesJSON = await fetch(`https://api.github.com/repos/aarush-narang/${repo.name}/languages`).then(res => res.json()).catch(() => {
+                                responseTypewriter.typeString('Unable to fetch.').start()
+                                typing = false
+                                return null
+                            })
                             return {
                                 name: repo.full_name,
                                 url: repo.html_url,
@@ -164,35 +208,115 @@ export default function Home() {
                             }
                         }))
 
-                        for (const repo of repositories) {
-                            const nameTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 2, className: styles.nameClass })
-                            const urlTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 4, className: styles.urlClass })
-                            const descriptionTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 8, className: styles.descriptionClass })
-                            const languagesTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 16, className: styles.languagesClass })
+                        if (repositories == null || repositories.includes(null)) break;
 
-                            await nameTypewriter.typeString(`${repo.name}${repo.fork ? ' (forked)' : ''}`).start()
-                            await descriptionTypewriter.typeString(`${repo.description}`).start()
-                            await languagesTypewriter.typeString(`${repo.languages}`).start()
-                            await urlTypewriter.typeString(`${repo.url}`).start()
-                        }
-                        typing = false
+                        setTimeout(async () => {
+                            for (const repo of repositories) {
+                                const nameTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 0, className: styles.nameClass })
+                                const urlTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 1, className: styles.urlClass })
+                                const descriptionTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 0, className: styles.descriptionClass })
+                                const languagesTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 1, className: styles.languagesClass })
+
+                                await nameTypewriter.typeString(`${repo.name}${repo.fork ? ' (forked)' : ''}`).start()
+                                await descriptionTypewriter.typeString(`${repo.description}`).start()
+                                await languagesTypewriter.typeString(`${repo.languages}`).start()
+                                await urlTypewriter.typeString(`${repo.url}`).start()
+                            }
+                            typing = false
+                        }, 1000)
+
                         break;
                     case 'about':
                         responseTypewriter
-                            .typeString('I am 16 years old and am passionate about building beautiful, responsive websites and applications. I have a passion for learning new technologies and constantly learning new things. You can find my projects by running the "projects" command and you can find my contact information by running the "contact" command.')
+                            .typeString('I am 16 years old and am passionate about building beautiful, responsive websites and applications.\n')
+                            .typeString('I have a passion for learning new technologies and constantly learning new things.\n')
+                            .typeString('I am currently a student at Lynbrook High School.\n\n')
+                            .typeString('You can find my projects by running the "projects" command and you can find my contact information by running the "contact" command.\n')
+                            .typeString('I am proficient in HTML, CSS, Javascript, and Python. I have used frameworks such as React/NextJS, Flask. And I have used MongoDB in several projects as well as experimented with MySQL/SQL based databases.')
                             .start().then(() => typing = false)
                         break;
                     case 'contact':
                         responseTypewriter
-                            .typeString('Email: aarushnarang@gmail.com\n')
+                            .typeString(`Email: ${CONTACT_INFO.email}\n`)
                             .pauseFor(100)
-                            .typeString('Phone #: 1-(408)-568-8678\n')
+                            .typeString(`GitHub: ${CONTACT_INFO.github}\n`)
                             .pauseFor(100)
-                            .typeString('GitHub: https://github.com/aarush-narang')
+                            .typeString(`LinkedIn: ${CONTACT_INFO.linkedin}\n\n\n`)
+                            .pauseFor(100)
+                            .typeString(`Type "contact (email/github/etc.)" to open`)
                             .start().then(() => typing = false)
                         break;
+                    case 'contact email':
+                        responseTypewriter.typeString('Opening...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .start().then(() => typing = false)
+                        setTimeout(() => {
+                            window.open(`mailto:${CONTACT_INFO.email}`)
+                        }, 1000);
+                        break
+                    case 'contact github':
+                        responseTypewriter.typeString('Opening...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .start().then(() => typing = false)
+                        setTimeout(() => {
+                            window.open(CONTACT_INFO.github)
+                        }, 1000);
+                        break
+                    case 'contact linkedin':
+                        responseTypewriter.typeString('Opening...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .start().then(() => typing = false)
+                        setTimeout(() => {
+                            window.open(CONTACT_INFO.linkedin)
+                        }, 1000);
+                        break
+                    case 'source':
+                        responseTypewriter.typeString('Opening...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .start().then(() => typing = false)
+                        setTimeout(() => {
+                            window.open(`${CONTACT_INFO.github}/portfolio`)
+                        }, 1000);
+                        break
                     case 'ping':
-                        responseTypewriter.typeString('Pong!').start().then(() => typing = false)
+                        const start = Date.now()
+                        const ping = await fetch(CONTACT_INFO.host, {
+                            mode: 'no-cors'
+                        }).catch(() => {
+                            responseTypewriter.typeString(`Unable to ping.`).start().then(() => typing = false)
+                            return null
+                        })
+                        const end = Date.now()
+                        const time = end - start
+                        if (ping != null) responseTypewriter.typeString(`Pong! ${time}ms`).start().then(() => typing = false)
                         break;
                     case 'ttt':
                         responseTypewriter
@@ -290,6 +414,7 @@ export default function Home() {
                     e.preventDefault()
                     historyIndex = historyIndex - 1 < 0 && historyIndex != history.length ? history.length - 1 : historyIndex - 1
                     consoleInputRef.current.value = history[historyIndex]
+                    setCursorPos(history[historyIndex].length)
 
                     consoleInputRef.current.dispatchEvent(new Event('input'))
                     break;
@@ -297,6 +422,7 @@ export default function Home() {
                     e.preventDefault()
                     historyIndex = historyIndex + 1 > history.length - 1 ? 0 : historyIndex + 1
                     consoleInputRef.current.value = history[historyIndex]
+                    setCursorPos(history[historyIndex].length)
 
                     consoleInputRef.current.dispatchEvent(new Event('input'))
                     break;

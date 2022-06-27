@@ -31,15 +31,28 @@ export default class TicTacToe {
         this.turn = 1
     }
     #printBoard() {
-        const typewriter = new Typewriter(this.#parent, { typingSpeed: 1, className: styles.boardClass })
+        const mainTypewriter = new Typewriter(this.#parent, { typingSpeed: 1, className: styles.boardClass })
+        const secondaryTypewriter = new Typewriter(this.#parent, { typingSpeed: 1, className: styles.boardClassChosen })
 
-        typewriter
+        mainTypewriter
+            .typeString('Reference Board:\n')
             .typeString(` ---`.repeat(3) + '\n')
-            .typeString(`| ${this.#xOrO(this.#board[0][0]) || "1"} | ${this.#xOrO(this.#board[0][1]) || "2"} | ${this.#xOrO(this.#board[0][2]) || "3"} |` + '\n')
+            .typeString(`| 1 | 2 | 3 |` + '\n')
             .typeString(` ---`.repeat(3) + '\n')
-            .typeString(`| ${this.#xOrO(this.#board[1][0]) || "4"} | ${this.#xOrO(this.#board[1][1]) || "5"} | ${this.#xOrO(this.#board[1][2]) || "6"} |` + '\n')
+            .typeString(`| 4 | 5 | 6 |` + '\n')
             .typeString(` ---`.repeat(3) + '\n')
-            .typeString(`| ${this.#xOrO(this.#board[2][0]) || "7"} | ${this.#xOrO(this.#board[2][1]) || "8"} | ${this.#xOrO(this.#board[2][2]) || "9"} |` + '\n')
+            .typeString(`| 7 | 8 | 9 |` + '\n')
+            .typeString(` ---`.repeat(3) + '\n')
+            .start()
+
+        secondaryTypewriter
+            .typeString('Main Board:\n')
+            .typeString(` ---`.repeat(3) + '\n')
+            .typeString(`| ${this.#xOrO(this.#board[0][0]) || " "} | ${this.#xOrO(this.#board[0][1]) || " "} | ${this.#xOrO(this.#board[0][2]) || " "} |` + '\n')
+            .typeString(` ---`.repeat(3) + '\n')
+            .typeString(`| ${this.#xOrO(this.#board[1][0]) || " "} | ${this.#xOrO(this.#board[1][1]) || " "} | ${this.#xOrO(this.#board[1][2]) || " "} |` + '\n')
+            .typeString(` ---`.repeat(3) + '\n')
+            .typeString(`| ${this.#xOrO(this.#board[2][0]) || " "} | ${this.#xOrO(this.#board[2][1]) || " "} | ${this.#xOrO(this.#board[2][2]) || " "} |` + '\n')
             .typeString(` ---`.repeat(3) + '\n')
             .start()
     }
@@ -150,7 +163,6 @@ export default class TicTacToe {
                 }
                 else {
                     errorTypewriter.typeString('That spot is already taken! Enter a number 1-9, make sure to take an empty spot!').start()
-                    this.#printBoard()
                 }
             }
         } catch (err) {
@@ -181,7 +193,6 @@ export default class TicTacToe {
                 }
                 else {
                     errorTypewriter.typeString('That spot is already taken! Enter a number 1-9, make sure to take an empty spot!').start()
-                    this.#printBoard()
                 }
             }
         } catch (err) {
