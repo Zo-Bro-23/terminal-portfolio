@@ -22,6 +22,7 @@ const CONTACT_INFO = {
     email: 'aarushnarang@gmail.com',
     github: 'https://github.com/aarush-narang',
     linkedin: 'https://www.linkedin.com/in/aarush-narang-0056a4241',
+    instagram: 'https://www.instagram.com/aarushnarang2/',
     host: 'https://aarush-narang.github.io/portfolio'
 }
 
@@ -239,6 +240,8 @@ export default function Home() {
                         responseTypewriter
                             .typeString(`Email: ${CONTACT_INFO.email}\n`)
                             .pauseFor(100)
+                            .typeString(`Instagram: ${CONTACT_INFO.instagram}\n`)
+                            .pauseFor(100)
                             .typeString(`GitHub: ${CONTACT_INFO.github}\n`)
                             .pauseFor(100)
                             .typeString(`LinkedIn: ${CONTACT_INFO.linkedin}\n\n\n`)
@@ -289,6 +292,21 @@ export default function Home() {
                             .start().then(() => typing = false)
                         setTimeout(() => {
                             window.open(CONTACT_INFO.linkedin)
+                        }, 1000);
+                        break
+                    case 'contact instagram':
+                        responseTypewriter.typeString('Opening...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .start().then(() => typing = false)
+                        setTimeout(() => {
+                            window.open(CONTACT_INFO.instagram)
                         }, 1000);
                         break
                     case 'source':
