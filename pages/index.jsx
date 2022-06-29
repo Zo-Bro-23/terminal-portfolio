@@ -634,41 +634,11 @@ export default function Home() {
                     consoleInputRef.current.dispatchEvent(new Event('input'))
                     break;
                 case 'backspace':
-                    if (!e.shiftKey && !e.ctrlKey) consoleInputRef.current.focus()
                     const pos = consoleInputRef.current.selectionStart != 0 ? consoleInputRef.current.selectionStart - 1 : 0
                     setCursorPos(pos)
                     break;
-                case 'a':
-                case 'b':
-                case 'c':
-                case 'd':
-                case 'e':
-                case 'f':
-                case 'g':
-                case 'h':
-                case 'i':
-                case 'j':
-                case 'k':
-                case 'l':
-                case 'm':
-                case 'n':
-                case 'o':
-                case 'p':
-                case 'q':
-                case 'r':
-                case 's':
-                case 't':
-                case 'u':
-                case 'v':
-                case 'w':
-                case 'x':
-                case 'y':
-                case 'z':
-                case ' ':
-                case 'enter':
-                    if (!e.shiftKey && !e.ctrlKey) consoleInputRef.current.focus()
-                    break;
                 default:
+                    if (!e.shiftKey && !e.ctrlKey) consoleInputRef.current.focus()
                     break;
             }
         }
