@@ -45,6 +45,11 @@
     font-weight: bold;
     font-size: 20px;
 }
+.tieClass {
+    margin: 4px 0 20px 0;
+    color: #f7eb91;
+    font-weight: bold;
+}
 .promptClass {
     margin: 4px 0 20px 0;
     color: hsl(195, 73%, 69%);

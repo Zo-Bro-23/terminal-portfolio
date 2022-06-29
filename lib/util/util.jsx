@@ -10,3 +10,7 @@ export function deviceType() {
 };
 
 export const BASE_PREFIX = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+export function randomNumber(min, max) {
+    return Math.random() * (max - min) + min;
+}

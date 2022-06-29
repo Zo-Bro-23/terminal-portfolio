@@ -1,9 +1,11 @@
 import Head from 'next/head'
 import { useEffect, useRef, useState } from 'react'
+import RockPaperScissors from '../lib/games/RockPaperScissors'
 import TicTacToe from '../lib/games/TicTacToe'
 import Typewriter from '../lib/Typewriter'
 import { deviceType, BASE_PREFIX } from '../lib/util/util'
 import styles from '../styles/Home.module.css'
+import { faker } from '@faker-js/faker'
 
 const USER_TEXT = 'C:\\Users\\Aarush\\Portfolio>' + ' '
 
@@ -100,6 +102,7 @@ export default function Home() {
 
         // Initialize Games
         const ttt = new TicTacToe(consoleDisplayRef.current)
+        const rps = new RockPaperScissors(consoleDisplayRef.current)
 
         const setCursorPos = (selectionPos) => {
             caretRef.current.style.left = `${220 + (selectionPos * CHAR_WIDTH) - (lineNumber * consoleInputDisplayRef.current.clientWidth)}px`
@@ -132,6 +135,7 @@ export default function Home() {
 
             const errTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 25, className: styles.errClass })
 
+            // command handlers & game handlers
             if (!game) {
                 switch (typedCommand.toLowerCase()) {
                     case 'clear':
@@ -330,13 +334,13 @@ export default function Home() {
                         const start = Date.now()
                         const ping = await fetch(CONTACT_INFO.host, {
                             mode: 'no-cors'
+                        }).then(() => {
+                            return Date.now() - start
                         }).catch(() => {
                             responseTypewriter.typeString(`Unable to ping.`).start().then(() => typing = false)
                             return null
                         })
-                        const end = Date.now()
-                        const time = end - start
-                        if (ping != null) responseTypewriter.typeString(`Pong! ${time}ms`).start().then(() => typing = false)
+                        if (ping != null) responseTypewriter.typeString(`Pong! ${ping}ms`).start().then(() => typing = false)
                         break;
                     case 'ttt':
                         responseTypewriter
@@ -344,11 +348,111 @@ export default function Home() {
                             .start().then(() => typing = false)
                         game = 'ttt'
                         break;
-                    case 'hangman': // unfinished commands TODO
-                    case 'ascii':
+                    case 'rps':
+                        responseTypewriter
+                            .typeString('Welcome to Rock Paper Scissors! Type "start" to start. Or type "exit" to exit at anytime.')
+                            .start().then(() => typing = false)
+                        game = 'rps'
+                        break;
+                    case 'hack':
+                        const randomCardIssuer = faker.finance.creditCardIssuer()
+                        const name = {
+                            firstName: faker.name.firstName(),
+                            lastName: faker.name.lastName(),
+                        }
+                        const randomDetails = {
+                            // bank details
+                            name: 'Bank of America',
+                            account: faker.finance.account(),
+                            routing: faker.finance.routingNumber(),
+                            accountName: faker.finance.accountName(),
+                            balance: faker.finance.amount(0, 1000000, 2, '$'),
+                            cardNumber: faker.finance.creditCardNumber(randomCardIssuer),
+                            cardCVV: faker.finance.creditCardCVV(),
+                            cardExpiration: faker.date.future(3, new Date()).toLocaleDateString(),
+                            cardIssuer: randomCardIssuer,
+                            // crypto details
+                            btcAddress: faker.finance.bitcoinAddress(),
+                            ethAddress: faker.finance.ethereumAddress(),
+
+                            // other details
+                            firstName: name.firstName,
+                            lastName: name.lastName,
+                            job: `${faker.name.jobArea()} ${faker.name.jobType()}: ${faker.name.jobTitle()}`,
+                            address: faker.address.streetAddress(),
+                            email: faker.internet.email(name.firstName, name.lastName),
+                            phone: faker.phone.number('+# (###) ###-####'),
+                            phoneImei: faker.phone.imei(),
+                        }
+                        // random hack messages
+                        responseTypewriter
+                            .typeString('Starting hack...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...')
+                            .deleteChars(3)
+                            .typeString('...\n\n')
+                            .pauseFor(200)
+                            .typeString('Grabbing Info...')
+                            .pauseFor(1000)
+                            .deleteChars(16)
+                            .typeString(`IP: ${faker.internet.ip()}\n`)
+                            .pauseFor(100)
+                            .typeString(`User Agent: ${faker.internet.userAgent()}\n`)
+                            .pauseFor(300)
+                            .typeString('Grabbing location...')
+                            .pauseFor(1000)
+                            .deleteChars(20)
+                            .typeString(`Location: ${faker.address.city()}, ${faker.address.stateAbbr()}\n`)
+                            .pauseFor(300)
+                            .typeString('Grabbing financial details...')
+                            .pauseFor(3000)
+                            .deleteChars(29)
+                            .typeString('Bank: Bank of America\n')
+                            .pauseFor(100)
+                            .typeString(`Account: ${randomDetails.account}\n`)
+                            .pauseFor(100)
+                            .typeString(`Routing: ${randomDetails.routing}\n`)
+                            .pauseFor(100)
+                            .typeString(`Account Name: ${randomDetails.accountName}\n`)
+                            .pauseFor(100)
+                            .typeString(`Balance: ${randomDetails.balance}\n`)
+                            .pauseFor(100)
+                            .typeString(`Card Number: ${randomDetails.cardNumber}\n`)
+                            .pauseFor(100)
+                            .typeString(`Card CVV: ${randomDetails.cardCVV}\n`)
+                            .pauseFor(100)
+                            .typeString(`Card Expiration: ${randomDetails.cardExpiration}\n`)
+                            .pauseFor(100)
+                            .typeString(`Card Issuer: ${randomDetails.cardIssuer}\n`)
+                            .pauseFor(1000)
+                            .typeString(`Bitcoin Address: ${randomDetails.btcAddress}\n`)
+                            .pauseFor(100)
+                            .typeString(`Ethereum Address: ${randomDetails.ethAddress}\n`)
+                            .pauseFor(500)
+                            .typeString('Grabbing other details...')
+                            .pauseFor(2000)
+                            .deleteChars(25)
+                            .typeString(`First Name: ${randomDetails.firstName}\n`)
+                            .pauseFor(100)
+                            .typeString(`Last Name: ${randomDetails.lastName}\n`)
+                            .pauseFor(100)
+                            .typeString(`Job: ${randomDetails.job}\n`)
+                            .pauseFor(100)
+                            .typeString(`Address: ${randomDetails.address}\n`)
+                            .pauseFor(100)
+                            .typeString(`Email: ${randomDetails.email}\n`)
+                            .pauseFor(100)
+                            .typeString(`Phone: ${randomDetails.phone}\n`)
+                            .pauseFor(100)
+                            .typeString(`Phone IMEI: ${randomDetails.phoneImei}\n\n`)
+                            .pauseFor(1000)
+                            .typeString('Hack complete.')
+                            .start()
+                            .then(() => typing = false)
+                        break
                     case '':
-                        const test = await fetch(`${BASE_PREFIX}/api/hello`).then(res => res.json()).catch(err => console.log(err))
-                        console.log(test)
                         typing = false
                         break;
                     default:
@@ -357,6 +461,9 @@ export default function Home() {
                 }
             }
             else if (game === 'ttt') {
+                if (!gameStarted && typedCommand !== 'start') {
+                    return responseTypewriter.typeString('Game not started!').start().then(() => typing = false)
+                }
                 const errorTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 1, className: styles.errClass })
                 switch (typedCommand.toLowerCase()) {
                     case 'exit':
@@ -399,23 +506,94 @@ export default function Home() {
                             ttt.end()
                             break
                         }
-                        if (!gameStarted) {
-                            responseTypewriter.typeString('Game not started!').start().then(() => typing = false)
-                            break
-                        }
                     default:
-                        if (!gameStarted) {
-                            responseTypewriter.typeString('Game not started!').start().then(() => typing = false)
-                            break
-                        } else if (parseInt(typedCommand) > 9 || parseInt(typedCommand) < 1 || Number.isNaN(parseInt(typedCommand)) || typedCommand == ' ') {
+                        if (parseInt(typedCommand) > 9 || parseInt(typedCommand) < 1 || Number.isNaN(parseInt(typedCommand)) || typedCommand == ' ') {
                             errorTypewriter.typeString('Invalid input. Enter an integer between 1 and 9. Or type "exit" to exit.').start().then(() => typing = false)
                         }
                 }
             }
-            else if (game === 'ascii') { }
-            else if (game === 'hangman') { }
+            else if (game === 'rps') {
+                if (!gameStarted && typedCommand !== 'start') {
+                    return responseTypewriter.typeString('Game not started!').start().then(() => typing = false)
+                }
+                const errorTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 1, className: styles.errClass })
+                const promptTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 1, className: styles.promptClass })
+                if (typedCommand.toLowerCase() !== 'start' && typedCommand.toLowerCase() !== 'exit') {
+                    if (!rps.bestOf && (parseInt(typedCommand) < 1 || parseInt(typedCommand) > 9 || Number.isNaN(parseInt(typedCommand)) || parseInt(typedCommand) % 2 === 0)) {
+                        return errorTypewriter.typeString('Please enter a number. (1-9, odd number)').start().then(() => typing = false)
+                    } else if (!rps.bestOf) {
+                        rps.setBestOf = parseInt(typedCommand)
+                        return promptTypewriter.typeString(`Ok, best of ${rps.bestOf} round${rps.bestOf == 1 ? '' : 's'}.\n\n`)
+                            .pauseFor(100)
+                            .typeString('What difficulty would you like to play at? (Enter 1 - 4, or 5 which is random)')
+                            .start().then(() => typing = false)
+                    }
 
+                    if (!rps.difficulty && (parseInt(typedCommand) > 5 || parseInt(typedCommand) < 1 || Number.isNaN(parseInt(typedCommand)))) {
+                        return errorTypewriter.typeString('Please enter a number. (1 - 4, or 5 which is random)').start().then(() => typing = false)
+                    } else if (!rps.difficulty) {
+                        rps.setDifficulty = parseInt(typedCommand)
+                        return promptTypewriter.typeString(`Ok, difficulty set to ${rps.difficulty}.\n\n`)
+                            .pauseFor(100)
+                            .typeString('Starting game...')
+                            .start().then(() => typing = false)
+                            .then(() => {
+                                rps.promptPlayer()
+                            })
+                    }
+                }
+
+                switch (typedCommand.toLowerCase()) {
+                    case 'exit':
+                        errorTypewriter.typeString('Exiting Rock Paper Scissors...').start().then(() => typing = false)
+                        game = null
+                        gameStarted = false
+                        rps.end()
+                        break;
+                    case 'start':
+                        if (gameStarted) {
+                            responseTypewriter.typeString('Game already started!').start().then(() => typing = false)
+                            break
+                        }
+                        responseTypewriter.typeString('Starting Rock Paper Scissors...').start().then(() => typing = false)
+                        rps.start()
+                        gameStarted = true
+                        break;
+                    case 'rock':
+                    case 'r':
+                        await rps.setPlayer('rock')
+                        typing = false
+                        break;
+                    case 'paper':
+                    case 'p':
+                        await rps.setPlayer('paper')
+                        typing = false
+                        break;
+                    case 'scissors':
+                    case 's':
+                        await rps.setPlayer('scissors')
+                        typing = false
+                        break
+                    case 'score':
+                        rps.getScore()
+                        typing = false
+                        break
+                    default:
+                        if (!['rock', 'r', 'paper', 'p', 'scissors', 's'].includes(typedCommand.toLowerCase())) {
+                            errorTypewriter.typeString('Invalid input.').start().then(() => typing = false)
+                        }
+                }
+
+                if (rps.winner) {
+                    gameStarted = false
+                    game = null
+                    errTypewriter.typeString('Exiting Rock Paper Scissors...').start().then(() => typing = false)
+                    rps.end()
+                }
+            }
         }
+
+        // Other events
         const handleInput = e => { // change display value to input value
             if (!typing) setInputText(e.target.value)
             else {
@@ -502,6 +680,7 @@ export default function Home() {
             <Head>
                 <title>Portfolio</title>
                 <link rel="icon" href={`${BASE_PREFIX}/favicon.ico`} />
+                
             </Head>
             <div className={styles.consoleDisplay} ref={consoleDisplayRef}></div>
             <div className={styles.consoleInputDisplay} ref={consoleInputDisplayRef}>
