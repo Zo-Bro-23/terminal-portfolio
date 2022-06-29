@@ -8,18 +8,8 @@ import styles from '../styles/Home.module.css'
 import { faker } from '@faker-js/faker'
 
 const USER_TEXT = 'C:\\Users\\Aarush\\Portfolio>' + ' '
-
-// typewriter, terminal style
-
-// terminal commands
-// clear: clear the display, help: display help, exit: exit the terminal/close the window,
-// projects: display projects from github, about: display about/who i am, contact: display contact (email, phone, etc)
-
-// secret commands like hangman, tic-tac-toe, ascii, and more will be added soon
-
 const CHAR_WIDTH = 8.1879
 const ASCII_ART_SPEED = 0
-
 const CONTACT_INFO = {
     email: 'aarushnarang@gmail.com',
     github: 'https://github.com/aarush-narang',
