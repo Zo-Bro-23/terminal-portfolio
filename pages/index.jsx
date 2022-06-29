@@ -52,31 +52,31 @@ export default function Home() {
         if (!mount) return // prevent duplicated rendering
 
         // Initial Ascii Art
-        const mainTypewriter1 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass1 })
+        // const mainTypewriter1 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass1 })
         const mainTypewriter2 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass2 })
         const mainTypewriter3 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass3 })
         const infoTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 3, className: styles.warnClass })
 
-        mainTypewriter1.typeString(`
-                             *       *             *         ..-. *   .    *
-                           .         *   *    .-. *  .  _  _/ ^  \\   _   .   *
-                                 *           /   \\     (( / ^    ^\\_/ \\       *  .
-                                _    .   .--'\\/\\_ \\     \`/ \`-._    /  ^\\  *  .-.
-                            *  / \\_  ___/ ^     ^\\/\\'__ /  ____   /\\   /\\  _/  ^\\ *
-                              /    \\/ _/__________\\________|  |_____  / .\`/    ./^\\  .
-                         .   /\\/\\  / /______________________________\\ \\  /\\    /   \\
-                            /    \\/ /________________________________\\ \\/^ \\/\\/    ^\\
-                          /\\  .-  \\   ||___|___||||||||||||___|__|||   /^-._        ^\\
-                         /  \`-.__ ^\\  ||___|___||||||   |||___|__|||  /     \`._    _.\`\\
-                        /        \`. \\ |||||||||||||||\`  |||||||||||| /            \`    \\
-                        ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
-                                                     /|\\
-                                                    / | \\
-                                                   /  |  \\
-                                                  /   |   \\
-                                                 /    |    \\
-                                                /     |     \\
-                                               /      |      \\`).start()
+        // mainTypewriter1.typeString(`
+        //                      *       *             *         ..-. *   .    *
+        //                    .         *   *    .-. *  .  _  _/ ^  \\   _   .   *
+        //                          *           /   \\     (( / ^    ^\\_/ \\       *  .
+        //                         _    .   .--'\\/\\_ \\     \`/ \`-._    /  ^\\  *  .-.
+        //                     *  / \\_  ___/ ^     ^\\/\\'__ /  ____   /\\   /\\  _/  ^\\ *
+        //                       /    \\/ _/__________\\________|  |_____  / .\`/    ./^\\  .
+        //                  .   /\\/\\  / /______________________________\\ \\  /\\    /   \\
+        //                     /    \\/ /________________________________\\ \\/^ \\/\\/    ^\\
+        //                   /\\  .-  \\   ||___|___||||||||||||___|__|||   /^-._        ^\\
+        //                  /  \`-.__ ^\\  ||___|___||||||   |||___|__|||  /     \`._    _.\`\\
+        //                 /        \`. \\ |||||||||||||||\`  |||||||||||| /            \`    \\
+        //                 ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+        //                                              /|\\
+        //                                             / | \\
+        //                                            /  |  \\
+        //                                           /   |   \\
+        //                                          /    |    \\
+        //                                         /     |     \\
+        //                                        /      |      \\`).start()
         mainTypewriter2.typeString(`
          _____                            .__       _______                                   /\\       
         /  _  \\ _____ _______ __ __  _____|  |__    \\      \\ _____ ____________    ____    ___)/ ______
