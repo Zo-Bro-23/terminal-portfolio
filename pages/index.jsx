@@ -19,7 +19,7 @@ const USER_TEXT = 'C:\\Users\\Aarush\\Portfolio>' + ' '
 
 const CHAR_WIDTH = 8.1879
 const ASCII_ART_SPEED = 0
-const COUNTER_LINK = 'shorturl.at/syI04'
+const COUNTER_LINK = 'shorturl.at/bqG25'
 
 const CONTACT_INFO = {
     email: 'aarushnarang@gmail.com',
@@ -103,7 +103,7 @@ export default function Home() {
 
         // Website Visit Counter
         setTimeout(async () => {
-           await fetch(`https://${COUNTER_LINK}`, { mode: 'no-cors' }).then(res => res.json()).catch(err => console.log(err))
+            await fetch(`https://${COUNTER_LINK}`, { mode: 'no-cors' }).then(res => res.json()).catch(err => console.log(err))
         }, 0);
 
         // Initialize Games
@@ -348,6 +348,7 @@ export default function Home() {
                         })
                         if (ping != null) responseTypewriter.typeString(`Pong! ${ping}ms`).start().then(() => typing = false)
                         break;
+                    // secret commands
                     case 'ttt':
                         responseTypewriter
                             .typeString('Welcome to Tic-Tac-Toe! Type "start" to start. Or type "exit" to exit at anytime.')
