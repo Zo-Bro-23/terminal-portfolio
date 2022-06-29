@@ -19,7 +19,6 @@ const USER_TEXT = 'C:\\Users\\Aarush\\Portfolio>' + ' '
 
 const CHAR_WIDTH = 8.1879
 const ASCII_ART_SPEED = 0
-const COUNTER_LINK = 'shorturl.at/bqG25'
 
 const CONTACT_INFO = {
     email: 'aarushnarang@gmail.com',
@@ -100,11 +99,6 @@ export default function Home() {
         `).start().then(() => {
             infoTypewriter.pauseFor(200).typeString('Welcome to my Portfolio! Type "help" to see a list of commands.').start()
         })
-
-        // Website Visit Counter
-        setTimeout(async () => {
-            await fetch(`https://${COUNTER_LINK}`, { mode: 'no-cors' }).then(res => res.json()).catch(err => console.log(err))
-        }, 0);
 
         // Initialize Games
         const ttt = new TicTacToe(consoleDisplayRef.current)
@@ -459,8 +453,6 @@ export default function Home() {
                             .start()
                             .then(() => typing = false)
                         break
-                    case `counter`:
-                        window.open(`https://www.shorturl.at/url-total-clicks.php?u=${COUNTER_LINK}`)
                     case '':
                         typing = false
                         break;
