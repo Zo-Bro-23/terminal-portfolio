@@ -121,7 +121,7 @@ export default function Home() {
             commandTypewriter.typeString(`${USER_TEXT}${typedCommand}`).start()
 
             const responseTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 10, className: styles.responseClass })
-            const commands = ['help', 'projects', 'about', 'contact', 'contact <social>', 'source', 'ping', 'clear', 'reload', 'exit', '+ other secret commands :)\n\n(Hint: try "ttt")']
+            const commands = ['help', 'projects', 'about', 'contact', 'contact <social>', 'source', 'ping', 'clear', 'reload', 'exit', '+ other secret commands :)\n\n(Hint: try "ttt" or "hack")']
 
             const errTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 25, className: styles.errClass })
 
