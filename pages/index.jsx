@@ -648,8 +648,8 @@ export default function Home() {
                 __html: `window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-
-                gtag('config', 'G-JZPGMKJ9Q8');`,
+              
+                gtag('config', 'G-1Z9V9EKN2X');`,
             }} />
             <div className={styles.consoleDisplay} ref={consoleDisplayRef}></div>
             <div className={styles.consoleInputDisplay} ref={consoleInputDisplayRef}>
