@@ -13,7 +13,7 @@ const ASCII_ART_SPEED = 0
 const CONTACT_INFO = {
     email: 'aarushnarang@gmail.com',
     github: 'https://github.com/aarush-narang',
-    linkedin: 'https://www.linkedin.com/in/aarush-narang-0056a4241',
+    linkedin: 'https://www.linkedin.com/in/aarush-narang',
     instagram: 'https://www.instagram.com/aarushnarang_/',
     host: 'https://aarush-narang.github.io/portfolio'
 }
