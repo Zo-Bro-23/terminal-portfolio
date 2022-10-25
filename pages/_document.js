@@ -6,15 +6,15 @@ export default function Document() {
       <Head>
         <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-JZPGMKJ9Q8"
+          src="https://www.googletagmanager.com/gtag/js?id=G-VNGV77LZLG"
         />
         <script
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-              
-                gtag('config', 'G-1Z9V9EKN2X');`,
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+          
+            gtag('config', 'G-VNGV77LZLG');`,
           }}
         />
       </Head>
