@@ -642,15 +642,6 @@ export default function Home() {
                 <title>Portfolio</title>
                 <link rel="icon" href={`${BASE_PREFIX}/favicon.ico`} />
             </Head>
-
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-JZPGMKJ9Q8"></script>
-            <script dangerouslySetInnerHTML={{
-                __html: `window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-              
-                gtag('config', 'G-1Z9V9EKN2X');`,
-            }} />
             <div className={styles.consoleDisplay} ref={consoleDisplayRef}></div>
             <div className={styles.consoleInputDisplay} ref={consoleInputDisplayRef}>
                 {USER_TEXT}
