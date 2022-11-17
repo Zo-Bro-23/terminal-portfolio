@@ -4,8 +4,8 @@ const nextConfig = {
   redirects: async () => {
     return [
       {
-        source: "/:path*",
-        destination: `/portfolio/:path*`,
+        source: "/",
+        destination: `/${process.env.NEXT_PUBLIC_BASE_PATH}`,
         permanent: true,
       },
     ];
