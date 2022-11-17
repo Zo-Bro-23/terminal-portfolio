@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  rewrites: async () => {
+  redirects: async () => {
     return [
       {
         source: "/:path*",
