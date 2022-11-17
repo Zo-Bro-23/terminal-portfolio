@@ -4,7 +4,7 @@ import RockPaperScissors from '../../lib/games/RockPaperScissors'
 import TicTacToe from '../../lib/games/TicTacToe'
 import Typewriter from '../../lib/Typewriter'
 import { deviceType, BASE_PREFIX } from '../../lib/util/util'
-import styles from '../styles/Home.module.css'
+import styles from '../../styles/Home.module.css'
 import { faker } from '@faker-js/faker'
 
 const USER_TEXT = 'C:\\Users\\Aarush\\Portfolio>' + ' '
