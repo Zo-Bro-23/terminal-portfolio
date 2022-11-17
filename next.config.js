@@ -6,6 +6,7 @@ const nextConfig = {
       {
         source: "/:path*",
         destination: `/portfolio/:path*`,
+        permanent: true,
       },
     ];
   },
