@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "aarush-narang.vercel.app"
+        }
+      ],
+      "destination": "/portfolio/:path*"
+    }
+  ]
+}
