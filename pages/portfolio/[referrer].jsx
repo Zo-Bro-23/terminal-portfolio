@@ -1,13 +1,14 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import config from "../config.js";
 
 const linksObj = {
   github:
-    "https://aarush-narang.vercel.app/portfolio?utm_source=github&utm_medium=social&utm_campaign=proj_link",
+    config.host + "?utm_source=github&utm_medium=social&utm_campaign=proj_link",
   linkedin:
-    "https://aarush-narang.vercel.app/portfolio?utm_source=linkedin&utm_medium=social&utm_campaign=bio",
+    config.host + "?utm_source=linkedin&utm_medium=social&utm_campaign=bio",
   instagram:
-    "https://aarush-narang.vercel.app/portfolio?utm_source=instagram&utm_medium=social&utm_campaign=bio",
+    config.host + "?utm_source=instagram&utm_medium=social&utm_campaign=bio",
 };
 
 const LINKS = new Map(Object.entries(linksObj));
@@ -22,7 +23,7 @@ export default function Redirect({}) {
       router.replace(LINKS.get(referrer));
     } else {
       router.replace(
-        `https://aarush-narang.vercel.app/portfolio?utm_source=${referrer}&utm_medium=unknown&utm_campaign=unknown`
+        `${config.host}?utm_source=${referrer}&utm_medium=unknown&utm_campaign=unknown`
       );
     }
   }, [referrer]);
