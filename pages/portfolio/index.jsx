@@ -194,8 +194,8 @@ export default function Home() {
                         responseTypewriter
                             .typeString(`Email: ${CONTACT_INFO.email}\n`)
                             .pauseFor(100)
-                            .typeString(`Instagram: ${CONTACT_INFO.instagram}\n`)
-                            .pauseFor(100)
+//                             .typeString(`Instagram: ${CONTACT_INFO.instagram}\n`)
+//                             .pauseFor(100)
                             .typeString(`GitHub: ${CONTACT_INFO.github}\n`)
                             .pauseFor(100)
                             .typeString(`LinkedIn: ${CONTACT_INFO.linkedin}\n\n\n`)
