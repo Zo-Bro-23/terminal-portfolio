@@ -31,13 +31,14 @@ export default function Home() {
     const gameStarted = useRef(false).current
 
     const typing = useRef(false).current
-    caretRef.current.style.left = 245
+    
     useEffect(() => {
         setMount(!mount)
         if (!mount) return // prevent duplicated rendering
 
         // Initial Ascii Art
         // const mainTypewriter1 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass1 })
+        caretRef.current.style.left = 245
         const mainTypewriter2 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass2 })
         const mainTypewriter3 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass3 })
         const infoTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 3, className: styles.warnClass })
