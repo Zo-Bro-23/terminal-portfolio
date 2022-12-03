@@ -53,7 +53,7 @@ export default function Home() {
         const rps = new RockPaperScissors(consoleDisplayRef.current)
 
         const setCursorPos = (selectionPos) => {
-            caretRef.current.style.left = `${220 + (selectionPos * CHAR_WIDTH) - (lineNumber * consoleInputDisplayRef.current.clientWidth)}px`
+            caretRef.current.style.left = `${245 + (selectionPos * CHAR_WIDTH) - (lineNumber * consoleInputDisplayRef.current.clientWidth)}px`
         }
         const handleConsoleSubmit = async e => { // type out in display once submitted command
             e.preventDefault()
