@@ -7,7 +7,7 @@ export default function Document() {
       <Head>
         <script
           async
-          src=`https://www.googletagmanager.com/gtag/js?id=${config.gtag}`
+          src=`"https://www.googletagmanager.com/gtag/js?id=${config.gtag}"`
         />
         <script
           dangerouslySetInnerHTML={{
@@ -15,7 +15,7 @@ export default function Document() {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
           
-            gtag('config', `${config.gtag}`);`,
+            gtag('config', `'${config.gtag}'`);`,
           }}
         />
       </Head>
