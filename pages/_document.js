@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import config from "../config.js";
 
 export default function Document() {
   return (
@@ -14,7 +15,7 @@ export default function Document() {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
           
-            gtag('config', 'G-VNGV77LZLG');`,
+            gtag('config', config.gtag);`,
           }}
         />
       </Head>
