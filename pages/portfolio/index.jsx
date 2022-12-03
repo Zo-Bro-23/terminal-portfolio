@@ -57,7 +57,7 @@ export default function Home() {
         }
         const handleConsoleSubmit = async e => { // type out in display once submitted command
             e.preventDefault()
-            setCursorPos(0)
+            setCursorPos(3)
 
             if (typing) return
 
