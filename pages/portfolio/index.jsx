@@ -38,7 +38,6 @@ export default function Home() {
 
         // Initial Ascii Art
         // const mainTypewriter1 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass1 })
-        caretRef.current.style.left = '245px'
         const mainTypewriter2 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass2 })
         const mainTypewriter3 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass3 })
         const infoTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 3, className: styles.warnClass })
@@ -54,8 +53,9 @@ export default function Home() {
         const rps = new RockPaperScissors(consoleDisplayRef.current)
 
         const setCursorPos = (selectionPos) => {
-            caretRef.current.style.left = `${245 + (selectionPos * CHAR_WIDTH) - (lineNumber * consoleInputDisplayRef.current.clientWidth)}px`
+            caretRef.current.style.left = `${USER_TEXT.length * CHAR_WIDTH + (selectionPos * CHAR_WIDTH) - (lineNumber * consoleInputDisplayRef.current.clientWidth)}px`
         }
+        setCursorPos(0)
         const handleConsoleSubmit = async e => { // type out in display once submitted command
             e.preventDefault()
             setCursorPos(0)
