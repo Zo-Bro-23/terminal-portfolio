@@ -8,6 +8,7 @@ const config = {
     instagram: 'https://www.instagram.com/aarushnarang_/',
     host: 'https://aarush-narang.vercel.app/portfolio'
   },
+  source: 'https://github.com/aarush-narang/portfolio',
   asciiArt1: `
                              *       *             *         ..-. *   .    *
                            .         *   *    .-. *  .  _  _/ ^  \\   _   .   *
