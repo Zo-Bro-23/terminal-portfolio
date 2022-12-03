@@ -6,7 +6,7 @@ const config = {
     github: 'https://github.com/aarush-narang',
     linkedin: 'https://www.linkedin.com/in/aarush-narang',
     instagram: 'https://www.instagram.com/aarushnarang_/',
-    host: 'https://aarush-narang.github.io/portfolio'
+    host: 'https://aarush-narang.vercel.app/portfolio'
   },
   asciiArt1: `
                              *       *             *         ..-. *   .    *
