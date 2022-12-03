@@ -6,7 +6,7 @@ import Typewriter from '../../lib/Typewriter'
 import { deviceType, BASE_PREFIX } from '../../lib/util/util'
 import styles from '../../styles/Home.module.css'
 import { faker } from '@faker-js/faker'
-import config from '../config.js'
+import config from '../../config.js'
 
 const USER_TEXT = config.prompt
 const CHAR_WIDTH = 8.1879
