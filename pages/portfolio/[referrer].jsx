@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import config from "../config.js";
+import config from "../../config.js";
 
 const linksObj = {
   github:
