@@ -275,7 +275,7 @@ export default function Home() {
                             .typeString('...')
                             .start().then(() => typing = false)
                         setTimeout(() => {
-                            window.open(`${CONTACT_INFO.github}/portfolio`)
+                            window.open(config.source)
                         }, 1000);
                         break
                     case 'ping':
