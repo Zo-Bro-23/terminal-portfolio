@@ -139,7 +139,7 @@ export default function Home() {
                             .typeString('...')
                             .start().then(() => typing = false)
 
-                        const repositoriesJSON = await fetch('https://api.github.com/users/aarush-narang/repos').then(res => res.json()).catch(() => {
+                        const repositoriesJSON = await fetch(`https://api.github.com/users/${config.github}/repos`).then(res => res.json()).catch(() => {
                             responseTypewriter.typeString('Unable to fetch.').start()
                             typing = false
                             return null
@@ -148,7 +148,7 @@ export default function Home() {
                         if (repositoriesJSON == null) break;
 
                         const repositories = await Promise.all(await repositoriesJSON.map(async repo => {
-                            const languagesJSON = await fetch(`https://api.github.com/repos/aarush-narang/${repo.name}/languages`).then(res => res.json()).catch(() => {
+                            const languagesJSON = await fetch(`https://api.github.com/repos/${config.github}/${repo.name}/languages`).then(res => res.json()).catch(() => {
                                 responseTypewriter.typeString('Unable to fetch.').start()
                                 typing = false
                                 return null
