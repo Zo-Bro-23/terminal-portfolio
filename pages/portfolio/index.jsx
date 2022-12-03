@@ -6,17 +6,12 @@ import Typewriter from '../../lib/Typewriter'
 import { deviceType, BASE_PREFIX } from '../../lib/util/util'
 import styles from '../../styles/Home.module.css'
 import { faker } from '@faker-js/faker'
+import config from '../config.js'
 
-const USER_TEXT = 'C:\\Users\\Aarush\\Portfolio>' + ' '
+const USER_TEXT = config.prompt
 const CHAR_WIDTH = 8.1879
 const ASCII_ART_SPEED = 0
-const CONTACT_INFO = {
-    email: 'aarushnarang@gmail.com',
-    github: 'https://github.com/aarush-narang',
-    linkedin: 'https://www.linkedin.com/in/aarush-narang',
-    instagram: 'https://www.instagram.com/aarushnarang_/',
-    host: 'https://aarush-narang.github.io/portfolio'
-}
+const CONTACT_INFO = config.contact
 
 export default function Home() {
     const consoleDisplayRef = useRef(null)
@@ -47,47 +42,10 @@ export default function Home() {
         const mainTypewriter3 = new Typewriter(consoleDisplayRef.current, { typingSpeed: ASCII_ART_SPEED, className: styles.asciiStartClass3 })
         const infoTypewriter = new Typewriter(consoleDisplayRef.current, { typingSpeed: 3, className: styles.warnClass })
 
-        // mainTypewriter1.typeString(`
-        //                      *       *             *         ..-. *   .    *
-        //                    .         *   *    .-. *  .  _  _/ ^  \\   _   .   *
-        //                          *           /   \\     (( / ^    ^\\_/ \\       *  .
-        //                         _    .   .--'\\/\\_ \\     \`/ \`-._    /  ^\\  *  .-.
-        //                     *  / \\_  ___/ ^     ^\\/\\'__ /  ____   /\\   /\\  _/  ^\\ *
-        //                       /    \\/ _/__________\\________|  |_____  / .\`/    ./^\\  .
-        //                  .   /\\/\\  / /______________________________\\ \\  /\\    /   \\
-        //                     /    \\/ /________________________________\\ \\/^ \\/\\/    ^\\
-        //                   /\\  .-  \\   ||___|___||||||||||||___|__|||   /^-._        ^\\
-        //                  /  \`-.__ ^\\  ||___|___||||||   |||___|__|||  /     \`._    _.\`\\
-        //                 /        \`. \\ |||||||||||||||\`  |||||||||||| /            \`    \\
-        //                 ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
-        //                                              /|\\
-        //                                             / | \\
-        //                                            /  |  \\
-        //                                           /   |   \\
-        //                                          /    |    \\
-        //                                         /     |     \\
-        //                                        /      |      \\`).start()
-        mainTypewriter2.typeString(`
-         _____                            .__       _______                                   /\\       
-        /  _  \\ _____ _______ __ __  _____|  |__    \\      \\ _____ ____________    ____    ___)/ ______
-       /  /_\\  \\\\__  \\\\_  __ \\  |  \\/  ___/  |  \\   /   |   \\\\__  \\\\_  __ \\__  \\  /    \\  / ___\\/  ___/
-      /    |    \\/ __ \\|  | \\/  |  /\\___ \\|   Y  \\ /    |    \\/ __ \\|  | \\// __ \\|   |  \\/ /_/  >___ \\ 
-      \\____|__  (____  /__|  |____//____  >___|  / \\____|__  (____  /__|  (____  /___|  /\\___  /____  >
-              \\/     \\/                 \\/     \\/          \\/     \\/           \\/     \\//_____/     \\/`).start()
-        mainTypewriter3.typeString(`
-        ___      ___           ___                  ___       ___                     ___           ___     
-       /\\  \\    /\\  \\         /\\  \\                /\\__\\     /\\  \\   ___             /\\  \\         /\\  \\    
-      /::\\  \\  /::\\  \\       /::\\  \\       ___    /:/ _/_   /::\\  \\ /\\  \\           /:/__/        /::\\  \\   
-     /:/\\:\\__\\/:/\\:\\  \\     /:/\\:\\__\\     /\\__\\  /:/ /\\__\\ /:/\\:\\  \\\\:\\  \\         /::\\  \\       /:/\\:\\  \\  
-    /:/ /:/  /:/  \\:\\  \\   /:/ /:/  /    /:/  / /:/ /:/  //:/  \\:\\  \\\\:\\  \\     ___\\/\\:\\  \\     /:/  \\:\\  \\ 
-   /:/_/:/  /:/__/ \\:\\__\\ /:/_/:/__/___ /:/__/ /:/_/:/  //:/__/ \\:\\__\\\\:\\  \\   /\\__\\  \\:\\  \\   /:/__/ \\:\\__\\
-   \\:\\/:/  /\\:\\  \\ /:/  / \\:\\/:::::/  //::\\  \\ \\:\\/:/  / \\:\\  \\ /:/  / \\:\\  \\ /:/  /   \\:\\  \\__\\:\\  \\ /:/  /
-    \\::/__/  \\:\\  /:/  /   \\::/~~/~~~~/:/\\:\\  \\ \\::/__/   \\:\\  /:/  /   \\:\\  /:/  /     \\:\\/\\__\\\\:\\  /:/  / 
-     \\:\\  \\   \\:\\/:/  /     \\:\\~~\\    \\/__\\:\\  \\ \\:\\  \\    \\:\\/:/  /     \\:\\/:/  /       \\::/  / \\:\\/:/  /  
-      \\:\\__\\   \\::/  /       \\:\\__\\        \\:\\__\\ \\:\\__\\    \\::/  /       \\::/  /        /:/  /   \\::/  /   
-       \\/__/    \\/__/         \\/__/         \\/__/  \\/__/     \\/__/         \\/__/         \\/__/     \\/__/    
-        `).start().then(() => {
-            infoTypewriter.pauseFor(200).typeString('Welcome to my Portfolio! Type "help" to see a list of commands.').start()
+        // mainTypewriter1.typeString(``).start()
+        mainTypewriter2.typeString(config.asciiArt2).start()
+        mainTypewriter3.typeString(config.asciiArt3).start().then(() => {
+            infoTypewriter.pauseFor(200).typeString(config.welcomeMessage).start()
         })
 
         // Initialize Games
@@ -224,12 +182,12 @@ export default function Home() {
                         break;
                     case 'about':
                         responseTypewriter
-                            .typeString('I am 16 years old and am passionate about building beautiful, responsive websites and applications.\n')
-                            .typeString('I have a passion for learning new technologies and constantly learning new things.\n')
-                            .typeString('I am currently a student at Lynbrook High School.\n\n')
-                            .typeString('You can find my projects by running the "projects" command and you can find my contact information by running the "contact" command.\n')
-                            .typeString('I am proficient in HTML, CSS, Javascript, and Python. I have used frameworks such as React/NextJS, Flask. And I have used MongoDB in several projects as well as experimented with MySQL/SQL based databases.\n')
-                            .typeString('I am currently working on a messaging app using NextJS and MongoDB\n')
+                            .typeString(config.about[0])
+                            .typeString(config.about[1])
+                            .typeString(config.about[2])
+                            .typeString(config.about[3])
+                            .typeString(config.about[4])
+                            .typeString(config.about[5])
                             .start().then(() => typing = false)
                         break;
                     case 'contact':
