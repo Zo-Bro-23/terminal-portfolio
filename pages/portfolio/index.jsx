@@ -31,7 +31,7 @@ export default function Home() {
     const gameStarted = useRef(false).current
 
     const typing = useRef(false).current
-
+    caretRef.current.style.left = 245
     useEffect(() => {
         setMount(!mount)
         if (!mount) return // prevent duplicated rendering
@@ -55,7 +55,6 @@ export default function Home() {
         const setCursorPos = (selectionPos) => {
             caretRef.current.style.left = `${245 + (selectionPos * CHAR_WIDTH) - (lineNumber * consoleInputDisplayRef.current.clientWidth)}px`
         }
-        setCursorPos(0)
         const handleConsoleSubmit = async e => { // type out in display once submitted command
             e.preventDefault()
             setCursorPos(0)
