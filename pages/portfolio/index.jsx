@@ -140,7 +140,7 @@ export default function Home() {
                             .typeString('...')
                             .start().then(() => typing = false)
 
-                        const repositoriesJSON = await fetch(`https://api.github.com/users/${config.github}/repos`).then(res => res.json()).catch(() => {
+                        const repositoriesJSON = await fetch(`https://api.github.com/users/${config.github}/repos?per_page=100&sort=updated&direction=asc`).then(res => res.json()).catch(() => {
                             responseTypewriter.typeString('Unable to fetch.').start()
                             typing = false
                             return null
